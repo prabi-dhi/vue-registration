@@ -4,22 +4,24 @@ import DynamicForm from "../components/DynamicForm.vue";
 import RegistrationForm from "../components/RegistrationForm.vue";
 import ShowData from "../components/ShowData.vue";
 import Home from "../components/Home.vue";
+import Student from "../components/Student.vue";
+import Teacher from "../components/Teacher.vue";
+
 const routes = [
   { path: "/login", component: LoginForm },
   {
     path: "/home",
     component: Home,
-    // meta: {
-    //   requiresAuth: true,
-    // },
   },
+
   { path: "/register", component: DynamicForm },
   {
     path: "/register-next",
     name: "register-next",
     component: RegistrationForm,
   },
-  { path: "/showdata", component: ShowData },
+  { path: "/students", component: Student },
+  { path: "/teachers", component: Teacher },
 ];
 const router = createRouter({
   history: createWebHistory(),

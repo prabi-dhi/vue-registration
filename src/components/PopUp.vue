@@ -7,7 +7,7 @@
                     <p name="body" class="text-center"> Click 'yes' to complete registration. </p>
                 </section>
                 <div class="flex space-x-10 justify-center mb-4">
-                    <RouterLink to="/showdata">
+                    <RouterLink to="/home">
                         <button @click="handleYes"
                             class=" shadow-lg px-4 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600">Yes</button>
                     </RouterLink>
@@ -19,7 +19,7 @@
     </div>
 </template>
 <script setup>
-import ShowData from './ShowData.vue';
+import Home from './Home.vue';
 
 const emit = defineEmits()
 function handleYes() {

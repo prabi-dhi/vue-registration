@@ -1,7 +1,8 @@
 <template>
     <div class="flex flex-col items-center justify-center py-8">
         <div class="flex-col justify-center bg-gray-100 border-2 rounded-lg p-3 w-1/4 h-auto shadow-lg">
-            <h1 class="text-2xl font-semibold text-gray-700 mb-6 text-center">LoginForm</h1>
+            <p class="text-red-500 text-center">{{ errorMessage }}</p>
+            <h1 class="font-semibold text-gray-700 mb-6 text-center">LoginForm</h1>
             <div class="flex flex-col items-center justify-center ">
                 <label class="block">Username </label>
                 <input class="border-2 rounded-lg h-9 w-5/6 shadow-lg" type='text' v-model="formData.username" required>
@@ -20,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -29,20 +30,21 @@ const formData = ref({
     username: '',
     password: ''
 })
-// const username = ref('')
-// const password = ref('')
+// onMounted(() => {
+//     if (localStorage.getItem('access_token')) {
+//         isLoggedIn.value = true
+//     }
+// })
 const errorMessage = ref('')
 async function LoginUser() {
     try {
         console.log(formData.value)
-        // axios.post('http://127.0.0.1:8000/api/token/')
         const response = await axios.post('http://127.0.0.1:8000/api/token/', formData.value)
         localStorage.setItem('access_token', response.data.access);
         localStorage.setItem('refresh_token', response.data.refresh);
 
         console.log("Logged in successfully")
         router.push('/home')
-        errorMessage.value = ''
     }
     catch (error) {
         if (error.response) {
@@ -52,4 +54,10 @@ async function LoginUser() {
         }
     }
 }
+// function LogoutUser() {
+//     localStorage.removeItem('access_token')
+//     localStorage.removeItem('refresh_token')
+//     isLoggedIn.value = false
+//     router.push('/login')
+// }
 </script>
